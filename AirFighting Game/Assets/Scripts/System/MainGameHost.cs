@@ -14,8 +14,9 @@ public class MainGameHost : MonoBehaviour
     private static MainGameHost Instance;
 
     public delegate void commonRegistered();
+    public delegate void commonRegistered_bool(bool isActive);
     public commonRegistered del_characterController;
-    public commonRegistered del_characterShoot;
+    public commonRegistered_bool del_characterShoot;
 
     private void Awake()
     {

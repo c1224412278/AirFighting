@@ -10,7 +10,7 @@ public class GameExecute : MonoBehaviour
     private void Start()
     {
         if (MainGameHost.instance.del_characterShoot != null)
-            MainGameHost.instance.del_characterShoot();
+            MainGameHost.instance.del_characterShoot(true);
     }
     private void Update()
     {

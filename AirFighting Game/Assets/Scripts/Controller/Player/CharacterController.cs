@@ -24,7 +24,7 @@ public class CharacterController : MonoBehaviour
     private void RegisteredEvent()
     {
         MainGameHost.instance.del_characterController += MoveController;
-        MainGameHost.instance.del_characterController += CallBullet;
+        MainGameHost.instance.del_characterShoot += ActiveBullet;
     }
     //角色移動控制
     private void MoveController()
@@ -42,8 +42,15 @@ public class CharacterController : MonoBehaviour
     }
 
     //子彈發射
-    private void CallBullet()
+    private void ActiveBullet(bool isActive)
     {
-        //StartCoroutine(this.bulletController.ShootingBullet());
+        if (isActive)
+        {
+            StartCoroutine(this.bulletController.ShootingBullet(this.gameObject , this.playerData.currectFireCount, this.playerData.shootCDTime));
+        }
+        else
+        {
+            StopCoroutine(this.bulletController.ShootingBullet(this.gameObject , 0 , 0f));
+        }
     }
 }

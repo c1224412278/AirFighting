@@ -7,6 +7,7 @@ public class PlayerData : ScriptableObject
 {
     public int maxHp;
     public int currectHp;
+    public int currectFireCount;
     public float maxMoveSpeed;
     public float minMoveSpeed;
     public float currectMoveSpeed;
