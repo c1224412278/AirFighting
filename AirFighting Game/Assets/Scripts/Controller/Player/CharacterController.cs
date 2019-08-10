@@ -24,7 +24,6 @@ public class CharacterController : MonoBehaviour
     private void RegisteredEvent()
     {
         MainGameHost.instance.del_characterController += MoveController;
-        MainGameHost.instance.del_characterShoot += ActiveBullet;
     }
     //角色移動控制
     private void MoveController()
@@ -33,24 +32,11 @@ public class CharacterController : MonoBehaviour
         Vector2 inputPosition = new Vector2(Input.GetAxisRaw("Horizontal") , Input.GetAxisRaw("Vertical"));
         if (inputPosition.sqrMagnitude >= 0.01f)
         {
-            movePosition = inputPosition * playerData.currectMoveSpeed * Time.deltaTime;
+            movePosition = inputPosition.normalized * playerData.currectMoveSpeed * Time.deltaTime;
         }
 
         this.rigidbody2D.velocity = movePosition;
         this.transform.position = new Vector2(Mathf.Clamp(this.transform.position.x, this.minX_Value, this.maxX_Value),
-                                             Mathf.Clamp(this.transform.position.y, this.minY_Value, this.maxY_Value));
-    }
-
-    //子彈發射
-    private void ActiveBullet(bool isActive)
-    {
-        if (isActive)
-        {
-            StartCoroutine(this.bulletController.ShootingBullet(this.gameObject , this.playerData.currectFireCount, this.playerData.shootCDTime));
-        }
-        else
-        {
-            StopCoroutine(this.bulletController.ShootingBullet(this.gameObject , 0 , 0f));
-        }
+                                                Mathf.Clamp(this.transform.position.y, this.minY_Value, this.maxY_Value));
     }
 }
